@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Dividendos</h2>
+
+<center>
+    <table border="1" >
+        <tr>
+          <td>Acao Referida</td>
+            <td>Data dá Compra</td>
+            <td>Data do Pagamento</td>
+            <td>Valor a ser Pago por Cota</td>
+        </tr>
+        @$listdividendos@
+      </table>
+      @$saldo@
+      <form action="/salvadividendos" method="POST">
+        <label for="fname">Acao Referida</label><br>
+        <input type="text" id="aco_referida" name="aco_referida" value=""><br>
+        <label for="fname">Data dá Compra</label><br>
+        <input type="text" id="data_compra" name="data_compra" value=""><br>
+        <label for="lname">Data do Pagamento</label><br>
+        <input type="text" id="valor" name="data_pagamento" value=""><br><br>
+        <label for="lname">Valor a ser Pago por Cota</label><br>
+        <input type="text" id="valor_da_cota" name="valor_da_cota" value=""><br>
+          <br><br>
+         <!-- <label for="fname">Codigo dá ação a ser Comprada</label><br>
+          <input type="text" id="compra" name="compra" value=""><br>-->
+        <input type="submit" value="Cadastrar dividendo">
+        </form> 
+      
+        <br><br>
+        <button>
+          <a href="/">Cadastro de Acaos</a>
+        </button>
+        <button>
+          <a href="/compra">Compras de acaos</a>
+        </button>
+        <button>
+          <a href="/vender">Venda de Acaos</a>
+        </button>
+          
+      <div>
+        Tamanho da lista @$list@.
+        <script>
+         // while( list.push(data) < 0)
+          while('@$list@' < 0)
+          {
+            if('@$list@' == 0)
+            '@$list@' ='@$list@' + '1';
+          }
+            
+        </script>
+      </div>
+      
+      </body>
+      </html>
+</center>
