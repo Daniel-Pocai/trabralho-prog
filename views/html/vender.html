@@ -1,0 +1,35 @@
+!DOCTYPE html>
+<html>
+<body>
+
+<h2>Venda De Acaos</h2>
+
+<p> Acaos Compradas</p>
+
+<table border="1" >
+  <tr>
+    <td>Data</td>
+    <td>Valor</td>
+    <td>quantidade</td>
+    <td>Codigo da Acao</td>
+      
+  </tr>
+  @$listcompra@
+</table>
+<p> Vender ?</p>
+<center>
+    <table border="1" >
+      <tr>
+        <td>Codigo dá Acao</td>
+      
+      </tr>
+      @$listvenda@
+    </table>
+    
+    <form action="/salvavenda" method="POST">
+      <label for="fname">Codigo da Acao</label><br>
+      <input type="text" id="codacao" name="codacao" value=""><br>
+     
+      <input type="submit" value="Vender Acao">
+      </form> 
+    </center>
