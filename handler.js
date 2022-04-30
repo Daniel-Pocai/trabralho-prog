@@ -189,14 +189,14 @@ var creatlistcompra  = (list) => {
     let codacao = "";
     let valor = 0;
     let saldo = "";
-    let layot2 = `<tr>
-    <td>{$Data}</td>
-    <td>{$Valor}</td>
-    <td>{$quantidade}</td>
-    <td>{$Codigo da Acao}</td> 
-    <td>{$valor total das acaos}</td/>
-    <td>{$acaos Cadastradas}</td>
-  </tr>`;
+    let layot2 =  `<tr>
+    <td>{$Codigo de Indentificação}</td>
+      <td>{$Nome}</td>
+      <td>{$Valor do Investimento}</td>
+      <td>{$Atuacao}</td>
+      <td>{$Funcionario?}</td>
+      <td>{$Tipo}</td>
+    </tr>`;
 
   let calc = 0 ;
  
