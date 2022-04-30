@@ -5,20 +5,14 @@
 <h2>Compra De Acaos</h2>
 
 <!--fazer algo para verificar o saldo do cara usuario -->
-
-
-
-<p>Acaos já Cadastradas</p>
+</table>
 <table border="1" >
   <tr>
-    <td>Codigo de Indentificação</td>
-      <td>Nome</td>
-      <td>Valor do Investimento</td>
-      <td>Funcionario?</td>
-      <td>Compra</td>
+    <td>acaos compradas</td>
   </tr>
-  @$listindex@
+  @$listsaldo@
 </table>
+
 
 <center>
 <table border="1" >
@@ -29,16 +23,10 @@
     <td>Codigo da Acao</td>
     <td>valor total das acaos</td>
     <td>acaos compradas</td>
+    <td>acaos Cadastradas</td>
   </tr>
   @$listcompra@
-  @$listnumdeCompra@
-</table>
-<table border="1" >
-  <tr>
-    <td>acaos compradas</td>
-  </tr>
-  @$listsaldo@
-</table>
+  </table>
 <form action="/salvacompra" method="POST">
   <label for="fname">Data</label><br>
   <input type="text" id="data" name="data" value=""><br>
@@ -50,6 +38,12 @@
   <input type="text" id="codcompra" name="codcompra" value=""><br><br>
   <!--<label for="fname">Codigo da Acao</label><br>-->
      <!--<input type="text" id="codacao" name="codacao" value=""><br>--> 
+     <label for="data">Acaos Cadastradas</label>
+<select name="data" id="data">
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+</select>
+<br><br>
   <input type="submit" value="Comprar">
   </form> 
 </center>

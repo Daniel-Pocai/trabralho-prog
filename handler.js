@@ -40,7 +40,9 @@ var loadDatadois = (response) => {
         docs.forEach(element => {
             list.push(element);  
         });
-        response.end(readFile("compra.html").replace("@$listcompra@", creatlistcompra(list)).replace("{$linhas}", createListElements(list)));
+        response.end(readFile("compra.html").replace("@$listcompra@", creatlistcompra(list))
+        .replace("{$linhas}", createListElements(list))
+        .replace("@$listsaldo@" , verificaSaldo(list)));
         //response.end(readFile("index.html").replace("@$list@", list.length).replace("@$listindex@" , creatlista(list)))
     });
 }
@@ -65,7 +67,7 @@ var loadDatavenda = (response) => {
 
 var loadDatasaldo = (response) => {
     let list = [];
-     global.connection.collection("compra").find({}).toArray((err, docs) => { // nome dá coletion venda
+     global.connection.collection("saldo").find({}).toArray((err, docs) => { // nome dá coletion venda
         if (err) {
             console.log("Deu merda!");
             return;
@@ -75,7 +77,7 @@ var loadDatasaldo = (response) => {
         docs.forEach(element => {
             list.push(element);  
         });
-        response.end(readFile("compra.html").replace("@$listsaldo@", creatlistacaosadiquiridas(list))
+        response.end(readFile("compra.html").replace("@$listsaldo@", verificaSaldo(list))
         .replace("{$linhas}", createListElements(list)));
         //response.end(readFile("index.html").replace("@$list@", list.length).replace("@$listindex@" , creatlista(list)))
     });
@@ -180,7 +182,7 @@ return listaGerada;
 var creatlistcompra  = (list) => {
     let listCompra = '';
     let codacao = "";
-    let valor = "";
+    let valor = 0;
     let saldo = "";
     let layot2 = `<tr>
     <td>{$Data}</td>
@@ -188,32 +190,52 @@ var creatlistcompra  = (list) => {
     <td>{$quantidade}</td>
     <td>{$Codigo da Acao}</td> 
     <td>{$valor total das acaos}</td/>
-    <td>{$acaos compradas}</td>
+    <td>{$acaos Cadastradas}</td>
   </tr>`;
 
- 
+  let calc = 0 ;
  
   // parseInt(valor , 10);
- 
+  let valorcomp = "";
   //let valor  = "0";
   list.forEach(element => {
       let acaosCompradas  = 0;
      // var valor = document.getElementById("valorcompra").values;
-      valoCompra =  parseInt(element.valordecompra) ;
+   
     //(valor) =  (valor) + parceint(valordecompra);
     listCompra += layot2.replace("{$Data}", element.data)
-    .replace("{$Valor}" , valoCompra = element.valordecompra)
+    .replace("{$Valor}" ,  element.valordecompra)
     .replace("{$quantidade}" , element.quant)
     .replace("{$Codigo da Acao}" , element.codcompra)
-    .replace("{$valor total das acaos}" ,parseInt(element.valordecompra) = parseInt(element.valordecompra) + parseInt(element.valordecompra));
+    .replace("{$valor total das acaos}" ,element.valordecompra)
+    .replace("{$acaos Cadastradas}" ,element.cod)
+     calc = valor = valor + parseInt(element.valordecompra);
+    valorcomp = element.valordecompra
     codacao = element.codcompra;
     valor = element.valordecompra;
  
-    
-    
   });
 
   return listCompra;
+}
+//parseInt("valorcomp" , 10);
+
+var verificaSaldo   = (calc , valorcomp) => {
+    let saldo = "";
+    let valor = 0;
+
+    let layot4 = `<tr>
+    <td>{$acaos compradas}</td>
+  </tr>`;
+  //saldo += tabela.replace("{$acaos compradas}" , valorcomp);
+  
+ 
+     parseInt(valorcomp);
+     parseInt(valor);
+     parseInt(calc);
+     
+    saldo += layot4.replace("{$acaos compradas}" , typeof valor === "undefined");
+  return saldo;
 }
 var creatlistacaosadiquiridas   = (list , valoCompra) => {
     let acaosadiquiridas = "";
@@ -305,7 +327,7 @@ module.exports = (request, response) => {
                     //.replace("@$listcompra@" , creatlistcompra(list)
                     //.replace("@$listacaos@" , acao(list))));
                     loadDatadois(response);
-                    loadDatasaldo(response);
+                   loadDatasaldo(response);
                     break;
                     case '/vender':
                     response.writeHead(200, {'Content-Type': 'text/html'});
@@ -348,9 +370,10 @@ module.exports = (request, response) => {
                     response.writeHead(200, {'Content-Type': 'text/html'});
                     collectData(request, (data) => {
                         console.log(data);
+                        //console.log(calc);
                         global.connection.collection("compra").insertOne(data);
+                        //global.connection.collection("saldo").insertOne(data);
                         console.log("data");
-                        console.log(valoCompra);
                     })
                     break;
 
@@ -371,8 +394,7 @@ module.exports = (request, response) => {
                                 global.connection.collection("dividendos").insertOne(data);
                                 console.log("data");
                             })
-                            break;
-               
+                            break;              
                 response.end(readFile("index.html").replace("@$list@", list.length)
                 .replace("@$listindex@" , creatlista(list)));  
      
