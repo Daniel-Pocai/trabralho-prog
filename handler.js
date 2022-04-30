@@ -161,6 +161,7 @@ var creatlista = (list) =>{
     <td>{$Codigo de Indentificação}</td>
       <td>{$Nome}</td>
       <td>{$Valor do Investimento}</td>
+      <td>{$Atuacao}</td>
       <td>{$Funcionario?}</td>
       <td>{$Tipo}</td>
   </tr>`;
@@ -170,6 +171,7 @@ list.forEach(element => {
     listaGerada += layot.replace("{$Codigo de Indentificação}", element.cod)
                                 .replace("{$Nome}" , element.fname)
                                 .replace("{$Valor do Investimento}" , element.valor)
+                                .replace("{$Atuacao}" , element.atuacao)
                                 .replace("{$Funcionario?}" , element.sim?"sim": "nao")
                                 .replace("{$Funcionario?}" , element.compra?" ": "nao")
                                 .replace("{$Tipo}" , element.preferencial?"preferencial" : "Ordinária")
