@@ -162,6 +162,7 @@ var creatlista = (list) =>{
       <td>{$Nome}</td>
       <td>{$Valor do Investimento}</td>
       <td>{$Funcionario?}</td>
+      <td>{$Tipo}</td>
   </tr>`;
 
 list.forEach(element => {
@@ -170,7 +171,8 @@ list.forEach(element => {
                                 .replace("{$Nome}" , element.fname)
                                 .replace("{$Valor do Investimento}" , element.valor)
                                 .replace("{$Funcionario?}" , element.sim?"sim": "nao")
-                                .replace("{$Funcionario?}" , element.compra?" ": "nao");
+                                .replace("{$Funcionario?}" , element.compra?" ": "nao")
+                                .replace("{$Tipo}" , element.preferencial?"preferencial" : "Ordinária")
                                 if("{$Codigo de Indentificação}" === "{$undefined}")
                                 layot = deleteRow(layot);
 });
