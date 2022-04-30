@@ -40,7 +40,7 @@ var loadDatadois = (response) => {
         docs.forEach(element => {
             list.push(element);  
         });
-        response.end(readFile("compra.html").replace("@$listcompra@", creatlistcompra(list))
+        response.end(readFile("compra.html").replace("@$listindex@", creatlistcompra(list))
         .replace("{$linhas}", createListElements(list))
         .replace("@$listsaldo@" , verificaSaldo(list)));
         //response.end(readFile("index.html").replace("@$list@", list.length).replace("@$listindex@" , creatlista(list)))
@@ -77,7 +77,7 @@ var loadDatasaldo = (response) => {
         docs.forEach(element => {
             list.push(element);  
         });
-        response.end(readFile("compra.html").replace("@$listsaldo@", verificaSaldo(list))
+        response.end(readFile("compra.html").replace("@$listsaldo@" , verificaSaldo(list))
         .replace("{$linhas}", createListElements(list)));
         //response.end(readFile("index.html").replace("@$list@", list.length).replace("@$listindex@" , creatlista(list)))
     });
@@ -159,22 +159,23 @@ var creatlista = (list) =>{
 
     let layot =  `<tr>
     <td>{$Codigo de Indentificação}</td>
-      <td>{$Nome}</td>
-      <td>{$Valor do Investimento}</td>
-      <td>{$Atuacao}</td>
-      <td>{$Funcionario?}</td>
-      <td>{$Tipo}</td>
+    <td>{$Atuacao}</td>
+    <td>{$Valor da acao}</td>
+    <td>{$Quantidade}</td>
+    <td>{$Tipo da acao}</td>
+    <td>{$Fracionaria}</td>
   </tr>`;
 
 list.forEach(element => {
    
     listaGerada += layot.replace("{$Codigo de Indentificação}", element.cod)
-                                .replace("{$Nome}" , element.fname)
-                                .replace("{$Valor do Investimento}" , element.valor)
                                 .replace("{$Atuacao}" , element.atuacao)
-                                .replace("{$Funcionario?}" , element.sim?"sim": "nao")
-                                .replace("{$Funcionario?}" , element.compra?" ": "nao")
-                                .replace("{$Tipo}" , element.preferencial?"preferencial" : "Ordinária")
+                                .replace("{$Valor da acao}" , element.valor)
+                                .replace("{$Quantidade}" , element.quant)
+                                .replace("{$Tipo da acao}" , element.preferencial?"preferencial" : "Ordinária")                             
+                                .replace("{$Fracionaria}" , element.sim?"sim": "nao")
+                                .replace("{$Fracionaria}" , element.nao?" ": "nao")     
+
                                 if("{$Codigo de Indentificação}" === "{$undefined}")
                                 layot = deleteRow(layot);
 });
